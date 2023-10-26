@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641275, b: 0.5748171, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641258, b: 0.5748172, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -623,6 +623,10 @@ PrefabInstance:
       propertyPath: mainCamera
       value: 
       objectReference: {fileID: 963194227}
+    - target: {fileID: 723375741718188498, guid: 9a40f33c2c7621d438ad1b83a09b6f64, type: 3}
+      propertyPath: shipBodyMonoBehaviour
+      value: 
+      objectReference: {fileID: 1784620114}
     - target: {fileID: 3965848888710409185, guid: 9a40f33c2c7621d438ad1b83a09b6f64, type: 3}
       propertyPath: m_Name
       value: player

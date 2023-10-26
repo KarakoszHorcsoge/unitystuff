@@ -1,4 +1,7 @@
 using Assets.scripts;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -27,6 +30,9 @@ public class ship : MonoBehaviour
     public MonoBehaviour shipBodyMonoBehaviour;
     public IshipBody shipBody;
 
+    public MonoBehaviour[] gunMonobehaviour;
+    public Igun[] guns = Array.Empty<Igun>();
+
     public Rigidbody2D shipRigidBody;
 
     private void Start()
@@ -34,15 +40,23 @@ public class ship : MonoBehaviour
         shipRigidBody = GetComponent<Rigidbody2D>();
         driver = driverMonoBehaviour.GetComponent<Idriver>();
         shipBody = shipBodyMonoBehaviour.GetComponent<IshipBody>();
+        health = shipBody.getMaxHealth();
 
+            var tmpGuns = new List<Igun>();
+        List<string> shootActivators = new List<string>();
+        for(var i = 0; i< gunMonobehaviour.Length;i++)
+        {
+            tmpGuns.Add(gunMonobehaviour[i].GetComponent<Igun>());
+            shootActivators.Add(tmpGuns[i].triggerButton);
+        }
+        guns = tmpGuns.ToArray();
         engine = engineMonoBehaviour.GetComponent<Iengine>();
         engineThrusterPower = engine.getTrusterPower();
         engineTurnPower = engine.getTurnSpeed();
         engineConsumtion = engine.getPowerConsuption();
 
-        string[] shootActivators = new string[] { "Fire1" };
 
-        driver.initShootListeners(shootActivators);
+        driver.initShootListeners(shootActivators.ToArray());
         var activators = driver.getShootTriggers();
         activators[0].AddListener(Shoot);
 
